@@ -1,0 +1,16 @@
+{
+  "name": "cinema-backend",
+  "version": "1.0.0",
+  "description": "**Hello from backend**",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
