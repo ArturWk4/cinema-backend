@@ -6,15 +6,11 @@ const { PORT } = require("./utils/constants");
 const app = express();
 
 app.use(express.json());
-
 app.use("/public", publicRouter);
 
 async function start() {
   try {
-    await sequelize
-      .sync
-      // { force: true }
-      ();
+    await sequelize.sync({ force: true });
     app.listen(PORT);
   } catch (e) {
     console.log(e);
