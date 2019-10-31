@@ -1,4 +1,5 @@
 const express = require("express");
+
 const sequelize = require("./database/connection");
 const publicRouter = require("./routes/public");
 const { PORT } = require("./utils/constants");
@@ -10,7 +11,10 @@ app.use("/public", publicRouter);
 
 async function start() {
   try {
-    await sequelize.sync({ force: true });
+    await sequelize
+      .sync
+      // { force: true }
+      ();
     app.listen(PORT);
   } catch (e) {
     console.log(e);

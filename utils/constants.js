@@ -4,7 +4,9 @@ const NAME_REGEX = /^[a-zA-Zа-яёА-ЯЁ]+$/;
 const LOGIN_REGEX = /(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-]{2,19}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,100}$/;
 const ROLE_USER = "USER";
+const ROLE_ADMIN = "ADMIN";
 const SECRET = "SECRET";
+const EXPIRESIN_JWT = 86400;
 
 module.exports = {
   PORT,
@@ -13,5 +15,7 @@ module.exports = {
   LOGIN_REGEX,
   PASSWORD_REGEX,
   ROLE_USER,
-  SECRET
+  ROLE_ADMIN,
+  SECRET,
+  EXPIRESIN_JWT
 };
