@@ -1,10 +1,10 @@
 const { Router } = require("express");
 const jwt = require("jsonwebtoken");
 
-const { User } = require("../../database/models");
-const { validateLoginAndPassword } = require("../../utils/validation");
-const { resolvePassword } = require("../../utils/password");
-const { SECRET, ROLE_ADMIN, EXPIRESIN_JWT } = require("../../utils/constants");
+const { User } = require("../database/models");
+const { validateLoginAndPassword } = require("../utils/validation");
+const { resolvePassword } = require("../utils/password");
+const { SECRET, ROLE_ADMIN, EXPIRESIN_JWT } = require("../utils/constants");
 
 const router = Router();
 

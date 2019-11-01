@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const { User } = require("../../../database/models");
-const { validateNewUser } = require("../../../utils/validation");
-const { ROLE_USER } = require("../../../utils/constants");
-const { createPassword } = require("../../../utils/password");
+const { User } = require("../../database/models");
+const { validateNewUser } = require("../../utils/validation");
+const { ROLE_USER } = require("../../utils/constants");
+const { createPassword } = require("../../utils/password");
 
 const router = Router();
 
