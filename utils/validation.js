@@ -1,26 +1,32 @@
-const { NAME_REGEX, LOGIN_REGEX, PASSWORD_REGEX } = require("./constants");
+const Joi = require("joi");
+const { NAME_REGEX } = require("./constants");
 
 const validateLoginAndPassword = (login, password) => {
-  return (
-    login &&
-    password &&
-    login.match(LOGIN_REGEX) &&
-    password.match(PASSWORD_REGEX)
-  );
+  const schema = {
+    login: Joi.string()
+      .min(2)
+      .max(20)
+      .required(),
+    password: Joi.string()
+      .min(8)
+      .max(100)
+      .required()
+  };
+  const { error } = Joi.validate({ login, password }, schema);
+  return error ? false : true;
 };
 
 const validateNewUser = (firstName, surname, login, password) => {
-  return (
-    validateLoginAndPassword(login, password) &&
-    firstName &&
-    surname &&
-    firstName.length > 2 &&
-    firstName.length < 32 &&
-    firstName.match(NAME_REGEX) &&
-    surname.length > 2 &&
-    surname.length < 32 &&
-    surname.match(NAME_REGEX)
-  );
+  const schema = {
+    firstName: Joi.string()
+      .regex(NAME_REGEX)
+      .required(),
+    surname: Joi.string()
+      .regex(NAME_REGEX)
+      .required()
+  };
+  const { error } = Joi.validate({ firstName, surname }, schema);
+  return error || !validateLoginAndPassword(login, password) ? false : true;
 };
 
 module.exports = {
