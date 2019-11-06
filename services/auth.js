@@ -8,7 +8,7 @@ const authenticate = async ({ login, password }) => {
   if (
     !user ||
     !(await resolvePassword(password, user.password)) ||
-    user.role !== ROLE_USER // will replaced by separated middleware
+    user.role !== ROLE_USER
   ) {
     return null;
   } else {

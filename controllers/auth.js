@@ -1,5 +1,5 @@
 const { createPassword } = require("../utils/password");
-const { ROLE_USER } = require("../utils/constants");
+const { ROLE_USER, ROLE_ADMIN } = require("../utils/constants");
 const {
   validateLoginAndPassword,
   validateNewUser
@@ -7,6 +7,24 @@ const {
 
 const authService = require("../services/auth");
 const userService = require("../services/user");
+
+const isUser = async (req, res, next) => {
+  const user = await getUserByLogin(req.body.login);
+  if (user.role === ROLE_USER) {
+    next();
+  } else {
+    res.status(400).json({ message: "You are not user" }); // will replased by redirection
+  }
+};
+
+const isAdmin = async (req, res, next) => {
+  const user = await getUserByLogin(req.body.login);
+  if (user.role === ROLE_ADMIN) {
+    next();
+  } else {
+    res.status(403).json({ message: "You are not admin" });
+  }
+};
 
 const login = async (req, res) => {
   const { login, password } = req.body;
@@ -44,5 +62,7 @@ const registration = async (req, res) => {
 
 module.exports = {
   login,
-  registration
+  registration,
+  isAdmin,
+  isUser
 };
