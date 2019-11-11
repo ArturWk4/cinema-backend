@@ -8,32 +8,14 @@ const {
 const authService = require("../services/auth");
 const userService = require("../services/user");
 
-const isUser = async (req, res, next) => {
-  const user = await getUserByLogin(req.body.login);
-  if (user.role === ROLE_USER) {
-    next();
-  } else {
-    res.status(400).json({ message: "You are not user" }); // will replased by redirection
-  }
-};
-
-const isAdmin = async (req, res, next) => {
-  const user = await getUserByLogin(req.body.login);
-  if (user.role === ROLE_ADMIN) {
-    next();
-  } else {
-    res.status(403).json({ message: "You are not admin" });
-  }
-};
-
-const login = async (req, res) => {
+const login = role => async (req, res) => {
   const { login, password } = req.body;
   if (!validateLoginAndPassword(login, password)) {
     res
       .status(400)
       .json({ message: "Login or passowrd don't match required format" });
   }
-  const token = await authService.authenticate({ login, password });
+  const token = await authService.authenticate({ login, password, role });
   if (!token) {
     res.status(400).json({ message: "Wrong username or password" });
   } else {
@@ -62,7 +44,5 @@ const registration = async (req, res) => {
 
 module.exports = {
   login,
-  registration,
-  isAdmin,
-  isUser
+  registration
 };
