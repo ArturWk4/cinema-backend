@@ -1,5 +1,5 @@
 const { createPassword } = require("../utils/password");
-const { ROLE_USER, ROLE_ADMIN } = require("../utils/constants");
+const { ROLE_USER } = require("../utils/constants");
 const {
   validateLoginAndPassword,
   validateNewUser
