@@ -17,7 +17,7 @@ const service = sequelize.define(
       allowNull: false
     },
     price: {
-      type: Sequelize.DECIMAL,
+      type: Sequelize.INTEGER.UNSIGNED,
       allowNull: false
     }
   },

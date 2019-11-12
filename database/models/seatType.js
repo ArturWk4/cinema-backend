@@ -16,7 +16,7 @@ const seatType = sequelize.define(
       unique: true
     },
     cost: {
-      type: Sequelize.DECIMAL.UNSIGNED,
+      type: Sequelize.INTEGER.UNSIGNED,
       allowNull: false
     }
   },

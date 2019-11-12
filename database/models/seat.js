@@ -16,11 +16,11 @@ const seat = sequelize.define(
     },
     xPos: {
       allowNull: false,
-      type: Sequelize.DOUBLE
+      type: Sequelize.INTEGER
     },
     yPos: {
       allowNull: false,
-      type: Sequelize.DOUBLE
+      type: Sequelize.INTEGER
     }
   },
   {
