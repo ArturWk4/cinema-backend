@@ -34,12 +34,15 @@ const registration = async (req, res) => {
       .status(HttpStatus.BAD_REQUEST)
       .json({ message: "Wrong data to add new user!" });
   }
-  if (!(await userService.getUserByLogin(login))) {
+
+  const user = await userService.getUserByLogin(login);
+  const hashPassword = await createPassword(password);
+  if (!user) {
     userService.addUser({
       firstName,
       surname,
       login,
-      password: await createPassword(password),
+      password: hashPassword,
       role: ROLE_USER
     });
     res

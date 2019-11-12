@@ -5,11 +5,8 @@ const { resolvePassword } = require("../utils/password");
 
 const authenticate = async ({ login, password, role }) => {
   const user = await User.findOne({ where: { login } });
-  if (
-    !user ||
-    !(await resolvePassword(password, user.password)) ||
-    user.role !== role
-  ) {
+  const isResolvedPassword = await resolvePassword(password, user.password);
+  if (!user || !isResolvedPassword || user.role !== role) {
     return null;
   } else {
     return (token = jwt.sign(
