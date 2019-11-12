@@ -11,10 +11,7 @@ app.use("/public", publicRouter);
 
 async function start() {
   try {
-    await sequelize
-      .sync
-      // { force: true }
-      ();
+    await sequelize.sync();
     app.listen(PORT);
   } catch (e) {
     console.log(e);
