@@ -36,9 +36,9 @@ const registration = async (req, res) => {
   }
 
   const user = await userService.getUserByLogin(login);
-  const hashPassword = await createPassword(password);
   if (!user) {
-    userService.addUser({
+    const hashPassword = await createPassword(password);
+    await userService.addUser({
       firstName,
       surname,
       login,
