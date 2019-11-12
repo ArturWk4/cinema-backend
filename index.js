@@ -1,8 +1,7 @@
 const express = require("express");
-
 const sequelize = require("./database/connection");
 const publicRouter = require("./routes");
-const { PORT } = require("./utils/constants");
+const { PORT } = require("./config");
 
 const app = express();
 
