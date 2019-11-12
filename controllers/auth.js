@@ -1,3 +1,5 @@
+const HttpStatus = require("http-status-codes");
+
 const { createPassword } = require("../utils/password");
 const { ROLE_USER } = require("../utils/constants");
 const {
@@ -12,21 +14,25 @@ const login = role => async (req, res) => {
   const { login, password } = req.body;
   if (!validateLoginAndPassword(login, password)) {
     res
-      .status(400)
+      .status(HttpStatus.BAD_REQUEST)
       .json({ message: "Login or passowrd don't match required format" });
   }
   const token = await authService.authenticate({ login, password, role });
   if (!token) {
-    res.status(400).json({ message: "Wrong username or password" });
+    res
+      .status(HttpStatus.BAD_REQUEST)
+      .json({ message: "Wrong username or password" });
   } else {
-    res.status(200).json({ message: "Successful auth", token });
+    res.status(HttpStatus.OK).json({ message: "Successful auth", token });
   }
 };
 
 const registration = async (req, res) => {
   const { firstName, surname, login, password } = req.body;
   if (!validateNewUser(firstName, surname, login, password)) {
-    res.status(400).json({ message: "Wrong data to add new user!" });
+    res
+      .status(HttpStatus.BAD_REQUEST)
+      .json({ message: "Wrong data to add new user!" });
   }
   if (!(await userService.getUserByLogin(login))) {
     userService.addUser({
@@ -36,9 +42,13 @@ const registration = async (req, res) => {
       password: await createPassword(password),
       role: ROLE_USER
     });
-    res.status(201).json({ message: "Successfully add new user!" });
+    res
+      .status(HttpStatus.CREATED)
+      .json({ message: "Successfully add new user!" });
   } else {
-    res.status(400).json({ message: "Wrong data to add new user!" });
+    res
+      .status(HttpStatus.BAD_REQUEST)
+      .json({ message: "Wrong data to add new user!" });
   }
 };
 
