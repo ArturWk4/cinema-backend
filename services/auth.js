@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../database/models");
-const { EXPIRESIN_JWT, SECRET } = require("../utils/constants");
+const { EXPIRES_IN_JWT, SECRET } = require("../utils/constants");
 const { resolvePassword } = require("../utils/password");
 
 const authenticate = async ({ login, password, role }) => {
@@ -12,7 +12,7 @@ const authenticate = async ({ login, password, role }) => {
     return (token = jwt.sign(
       { login, password: user.password, role, id: user.id },
       SECRET,
-      { expiresIn: EXPIRESIN_JWT }
+      { expiresIn: EXPIRES_IN_JWT }
     ));
   }
 };
