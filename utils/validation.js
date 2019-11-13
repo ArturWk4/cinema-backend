@@ -5,7 +5,6 @@ const validateLoginAndPassword = (login, password) => {
   const schema = {
     login: Joi.string()
       .min(2)
-      .max(20)
       .required(),
     password: Joi.string()
       .min(8)
