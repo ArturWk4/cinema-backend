@@ -19,14 +19,6 @@ const hall = sequelize.define(
     imageName: {
       type: Sequelize.STRING,
       allowNull: false
-    },
-    seatsAmount: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-      validate: {
-        min: 1,
-        max: 1000
-      }
     }
   },
   {

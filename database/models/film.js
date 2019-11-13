@@ -22,7 +22,7 @@ const film = sequelize.define(
       type: Sequelize.DATEONLY,
       allowNull: false
     },
-    description: Sequelize.STRING(511)
+    description: Sequelize.STRING
   },
   {
     tableName: "film",
