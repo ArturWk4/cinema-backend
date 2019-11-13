@@ -4,7 +4,7 @@ dotenv.config({ path: "./.env" });
 module.exports = {
   PORT: process.env.PORT,
   DB_NAME: process.env.DB_NAME,
-  USER: process.env.USER,
-  PASSWORD: process.env.PASSWORD,
+  DB_USER: process.env.DB_USER,
+  DB_PASSWORD: process.env.DB_PASSWORD,
   HOST: process.env.HOST
 };
