@@ -25,7 +25,8 @@ const validateNewUser = (firstName, surname, login, password) => {
       .required()
   };
   const { error } = Joi.validate({ firstName, surname }, schema);
-  return !(error || !validateLoginAndPassword(login, password))
+  const validatedLoginAndPassword = validateLoginAndPassword(login, password);
+  return !(error || !validatedLoginAndPassword);
 };
 
 module.exports = {
