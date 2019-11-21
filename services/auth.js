@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { User } = require("../database/models");
+const User = require("../database/models/user");
 const { EXPIRES_IN_JWT, SECRET } = require("../utils/constants");
 const { resolvePassword } = require("../utils/password");
 
