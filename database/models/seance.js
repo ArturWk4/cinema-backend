@@ -14,6 +14,10 @@ const seance = sequelize.define(
       allowNull: false,
       type: Sequelize.INTEGER
     },
+    date: {
+      type: Sequelize.DATE,
+      allowNull: false
+    },
     time: {
       type: Sequelize.TIME,
       allowNull: false
