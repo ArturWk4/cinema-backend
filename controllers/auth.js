@@ -20,7 +20,7 @@ const login = role => async (req, res) => {
   const token = await authService.authenticate({ login, password, role });
   if (!token) {
     res
-      .status(HttpStatus.BAD_REQUEST)
+      .status(HttpStatus.UNAUTHORIZED)
       .json({ message: "Wrong username or password" });
   } else {
     res.status(HttpStatus.OK).json({ token });
