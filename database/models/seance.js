@@ -14,12 +14,8 @@ const seance = sequelize.define(
       allowNull: false,
       type: Sequelize.INTEGER
     },
-    date: {
+    startsAt: {
       type: Sequelize.DATE,
-      allowNull: false
-    },
-    time: {
-      type: Sequelize.TIME,
       allowNull: false
     }
   },
