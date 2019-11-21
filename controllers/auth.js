@@ -23,7 +23,7 @@ const login = role => async (req, res) => {
       .status(HttpStatus.BAD_REQUEST)
       .json({ message: "Wrong username or password" });
   } else {
-    res.status(HttpStatus.OK).json({ message: "Successful auth", token });
+    res.status(HttpStatus.OK).json({ token });
   }
 };
 
@@ -45,9 +45,7 @@ const registration = async (req, res) => {
       password: hashPassword,
       role: ROLE_USER
     });
-    res
-      .status(HttpStatus.CREATED)
-      .json({ message: "Successfully add new user!" });
+    res.status(HttpStatus.CREATED);
   } else {
     res
       .status(HttpStatus.BAD_REQUEST)
