@@ -10,7 +10,7 @@ const bookedSeat = sequelize.define(
       allowNull: false,
       type: Sequelize.INTEGER
     },
-    active: Sequelize.BOOLEAN
+    isTaken: Sequelize.BOOLEAN
   },
   {
     tableName: "bookedSeat",
