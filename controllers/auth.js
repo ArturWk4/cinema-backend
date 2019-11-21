@@ -45,7 +45,7 @@ const registration = async (req, res) => {
       password: hashedPassword,
       role: ROLE_USER
     });
-    res.status(HttpStatus.CREATED);
+    return res.status(HttpStatus.CREATED).end();
   } else {
     res
       .status(HttpStatus.BAD_REQUEST)
