@@ -14,6 +14,10 @@ const film = sequelize.define(
       type: Sequelize.STRING,
       allowNull: false
     },
+    duration: {
+      type: sequelize.TIME,
+      allowNull: false
+    },
     startsAt: {
       type: Sequelize.DATEONLY,
       allowNull: false
