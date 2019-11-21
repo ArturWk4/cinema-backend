@@ -37,12 +37,12 @@ const registration = async (req, res) => {
 
   const user = await userService.getUserByLogin(login);
   if (!user) {
-    const hashPassword = await createPassword(password);
+    const hashedPassword = await createPassword(password);
     await userService.addUser({
       firstName,
       surname,
       login,
-      password: hashPassword,
+      password: hashedPassword,
       role: ROLE_USER
     });
     res.status(HttpStatus.CREATED);
