@@ -10,7 +10,7 @@ const city = sequelize.define(
       allowNull: false,
       type: Sequelize.INTEGER
     },
-    title: {
+    name: {
       type: Sequelize.STRING,
       allowNull: false,
       unique: true

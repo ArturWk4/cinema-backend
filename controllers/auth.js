@@ -20,10 +20,10 @@ const login = role => async (req, res) => {
   const token = await authService.authenticate({ login, password, role });
   if (!token) {
     res
-      .status(HttpStatus.BAD_REQUEST)
+      .status(HttpStatus.UNAUTHORIZED)
       .json({ message: "Wrong username or password" });
   } else {
-    res.status(HttpStatus.OK).json({ message: "Successful auth", token });
+    res.status(HttpStatus.OK).json({ token });
   }
 };
 
@@ -37,17 +37,15 @@ const registration = async (req, res) => {
 
   const user = await userService.getUserByLogin(login);
   if (!user) {
-    const hashPassword = await createPassword(password);
+    const hashedPassword = await createPassword(password);
     await userService.addUser({
       firstName,
       surname,
       login,
-      password: hashPassword,
+      password: hashedPassword,
       role: ROLE_USER
     });
-    res
-      .status(HttpStatus.CREATED)
-      .json({ message: "Successfully add new user!" });
+    return res.status(HttpStatus.CREATED).end();
   } else {
     res
       .status(HttpStatus.BAD_REQUEST)
