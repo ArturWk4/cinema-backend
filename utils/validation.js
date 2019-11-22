@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const moment = require("moment");
 const { NAME_REGEX } = require("./constants");
 
 const validateLoginAndPassword = (login, password) => {
@@ -29,7 +30,22 @@ const validateNewUser = (firstName, surname, login, password) => {
   return !(error || !validatedLoginAndPassword);
 };
 
+const validateFilm = (title, description, duration, startsAt, endsAt) => {
+  const startMoment = moment(startsAt, "YYYY-MM-DD", true);
+  const endMoment = moment(endsAt, "YYYY-MM-DD", true);
+  const durationMoment = moment(duration, "HH:mm:ss", true);
+  return (
+    title &&
+    description &&
+    durationMoment.isValid() &&
+    startMoment.isValid() &&
+    endMoment.isValid() &&
+    endMoment.valueOf() > startMoment.valueOf()
+  );
+};
+
 module.exports = {
   validateLoginAndPassword,
-  validateNewUser
+  validateNewUser,
+  validateFilm
 };
