@@ -1,4 +1,4 @@
-const { Film } = require("../database/models");
+const Film = require("../database/models/film");
 
 const addFilm = async film => Film.create(film);
 const getFilm = async id => Film.findByPk(id);
