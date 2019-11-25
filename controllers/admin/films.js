@@ -20,7 +20,8 @@ const addFilm = async (req, res) => {
   }
 };
 
-const getFilm = id => async (req, res) => {
+const getFilm = async (req, res) => {
+  const { id } = req.params.id;
   const film = await filmsService.getFilm(id);
   if (!film) {
     res.status(HttpStatus.NOT_FOUND).end();
@@ -34,7 +35,8 @@ const getAllFilms = async (req, res) => {
   res.status(HttpStatus.OK).json(films);
 };
 
-const deleteFilm = id => async (req, res) => {
+const deleteFilm = async (req, res) => {
+  const { id } = req.params.id;
   const film = filmsService.getFilm(id);
   if (!film) {
     res.status(HttpStatus.NOT_FOUND).end();
