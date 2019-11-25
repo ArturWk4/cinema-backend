@@ -1,6 +1,6 @@
 const HttpStatus = require("http-status-codes");
 const filmsService = require("../../services/films");
-const validateFilm = require("../../utils/validation");
+const { validateFilm } = require("../../utils/validation");
 
 const addFilm = async (req, res) => {
   const { title, description, duration, startsAt, endsAt } = req.body;
@@ -21,7 +21,7 @@ const addFilm = async (req, res) => {
 };
 
 const getFilm = async (req, res) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   const film = await filmsService.getFilm(id);
   if (!film) {
     res.status(HttpStatus.NOT_FOUND).end();
@@ -36,7 +36,7 @@ const getAllFilms = async (req, res) => {
 };
 
 const deleteFilm = async (req, res) => {
-  const { id } = req.params.id;
+  const { id } = req.params;
   const film = filmsService.getFilm(id);
   if (!film) {
     res.status(HttpStatus.NOT_FOUND).end();
