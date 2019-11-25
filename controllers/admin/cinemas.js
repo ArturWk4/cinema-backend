@@ -45,7 +45,7 @@ const deleteCinema = async (req, res) => {
   if (!cinema) {
     res.status(HttpStatus.NOT_FOUND).end();
   } else {
-    await cinemaServices.deleteCinema(id);
+    await cinemaServices.deleteCinema(cinema);
     res
       .status(HttpStatus.OK)
       .json({ message: `Successfuly removed cinema with id ${id}` });

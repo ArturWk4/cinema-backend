@@ -37,11 +37,11 @@ const getAllFilms = async (req, res) => {
 
 const deleteFilm = async (req, res) => {
   const { id } = req.params;
-  const film = filmsService.getFilm(id);
+  const film = await filmsService.getFilm(id);
   if (!film) {
     res.status(HttpStatus.NOT_FOUND).end();
   } else {
-    await deleteFilm(id);
+    await filmsService.deleteFilm(film);
     res
       .status(HttpStatus.OK)
       .json({ message: `Successfully deleted film with id: ${id}` });
