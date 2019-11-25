@@ -1,14 +1,24 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const passport = require("passport");
 dotenv.config({ path: "./.env" });
 const sequelize = require("./database/connection");
+const jwtStrategy = require("./passport/strategy");
 const publicRouter = require("./routes");
+const adminRouter = require("./routes/admin/index");
 const { PORT } = process.env;
-
 const app = express();
 
+passport.use(jwtStrategy);
 app.use(express.json());
+
 app.use("/public", publicRouter);
+
+app.use(
+  "/admin",
+  passport.authenticate("jwt", { session: false }),
+  adminRouter
+);
 
 async function start() {
   try {
