@@ -1,11 +1,11 @@
-const filmsAccesser = require("../data-access/films");
+const filmsAccessor = require("../data-access/films");
 const { validateFilm } = require("../utils/validation");
 
 const addFilm = async ({ title, description, duration, startsAt, endsAt }) => {
   if (!validateFilm(title, description, duration, startsAt, endsAt)) {
     return null;
   } else {
-    return await filmsAccesser.addFilm({
+    return await filmsAccessor.addFilm({
       title,
       description,
       duration,
@@ -16,7 +16,7 @@ const addFilm = async ({ title, description, duration, startsAt, endsAt }) => {
 };
 
 const getFilm = async id => {
-  const film = await filmsAccesser.getFilm(id);
+  const film = await filmsAccessor.getFilm(id);
   if (!film) {
     return null;
   } else {
@@ -24,14 +24,14 @@ const getFilm = async id => {
   }
 };
 
-const getAllFilms = async () => await filmsAccesser.getAllFilms();
+const getAllFilms = async () => await filmsAccessor.getAllFilms();
 
 const deleteFilm = async id => {
-  const film = await filmsAccesser.getFilm(id);
+  const film = await filmsAccessor.getFilm(id);
   if (!film) {
     return null;
   } else {
-    return await filmsAccesser.deleteFilm(film);
+    return await filmsAccessor.deleteFilm(film);
   }
 };
 
