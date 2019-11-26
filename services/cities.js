@@ -1,10 +1,22 @@
-const City = require("../database/models/city");
+const cityAccessor = require("../data-access/cities");
 
-const addCity = async city => City.create(city);
-const getCity = async id => City.findByPk(id);
-const getAllCities = async () => City.findAll();
-const deleteCity = async city => city.destroy();
+const addCity = async city => cityAccessor.addCity(city);
 
+const getCity = async id => {
+  const city = await cityAccessor.getCity(id);
+  return city || null;
+};
+
+const getAllCities = async () => cityAccessor.getAllCities();
+
+const deleteCity = async id => {
+  const city = await cityAccessor.getCity(id);
+  if (!city) {
+    return null;
+  } else {
+    return await cityAccessor.deleteCity(id);
+  }
+};
 module.exports = {
   addCity,
   getCity,

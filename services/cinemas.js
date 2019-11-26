@@ -22,11 +22,7 @@ const addCinema = async ({ title, city }) => {
 
 const getCinema = async id => {
   const cinema = await cinemaAccessor.getCinema(id);
-  if (!cinema) {
-    return null;
-  } else {
-    return cinema;
-  }
+  return cinema || null;
 };
 
 const getAllCinemas = async () => await cinemaAccessor.getAllCinemas();

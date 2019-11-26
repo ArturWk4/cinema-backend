@@ -17,11 +17,7 @@ const addFilm = async ({ title, description, duration, startsAt, endsAt }) => {
 
 const getFilm = async id => {
   const film = await filmsAccessor.getFilm(id);
-  if (!film) {
-    return null;
-  } else {
-    return film;
-  }
+  return film || null;
 };
 
 const getAllFilms = async () => await filmsAccessor.getAllFilms();
