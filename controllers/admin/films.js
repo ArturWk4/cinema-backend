@@ -1,21 +1,13 @@
 const HttpStatus = require("http-status-codes");
 const filmsService = require("../../services/films");
-const { validateFilm } = require("../../utils/validation");
 
 const addFilm = async (req, res) => {
-  const { title, description, duration, startsAt, endsAt } = req.body;
-  if (!validateFilm(title, description, duration, startsAt, endsAt)) {
+  const film = await filmsService.addFilm(req.body);
+  if (!film) {
     res
       .status(HttpStatus.BAD_REQUEST)
       .json({ message: "Wrong data to add film" });
   } else {
-    await filmsService.addFilm({
-      title,
-      description,
-      duration,
-      startsAt,
-      endsAt
-    });
     res.status(HttpStatus.CREATED).end();
   }
 };
@@ -37,11 +29,10 @@ const getAllFilms = async (req, res) => {
 
 const deleteFilm = async (req, res) => {
   const { id } = req.params;
-  const film = await filmsService.getFilm(id);
-  if (!film) {
+  const deletedFilm = await filmsService.deleteFilm(id);
+  if (!deletedFilm) {
     res.status(HttpStatus.NOT_FOUND).end();
   } else {
-    await filmsService.deleteFilm(film);
     res
       .status(HttpStatus.OK)
       .json({ message: `Successfully deleted film with id: ${id}` });
