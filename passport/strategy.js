@@ -1,5 +1,6 @@
 const { ExtractJwt, Strategy } = require("passport-jwt");
-const { SECRET, ROLE_ADMIN } = require("../utils/constants");
+const { ROLE_ADMIN } = require("../utils/constants");
+const { SECRET } = process.env;
 const { getUserByLogin } = require("../services/user");
 
 const options = {
