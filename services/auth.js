@@ -1,12 +1,12 @@
 const jwt = require("jsonwebtoken");
 const User = require("../database/models/user");
-const { EXPIRES_IN_JWT, SECRET } = require("../utils/constants");
+const { EXPIRES_IN_JWT, SECRET } = process.env;
 const { resolvePassword } = require("../utils/password");
 
 const authenticate = async ({ login, password, role }) => {
   const user = await User.findOne({ where: { login } });
-  const isResolvedPassword = await resolvePassword(password, user.password);
-  if (!user || !isResolvedPassword || user.role !== role) {
+  const validPassword = await resolvePassword(password, user.password);
+  if (!user || !validPassword || user.role !== role) {
     return null;
   } else {
     return (token = jwt.sign(
