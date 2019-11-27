@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../database/models/user");
-const { EXPIRES_IN_JWT, SECRET } = require("../utils/constants");
+const { EXPIRES_IN_JWT, SECRET } = process.env;
 const { resolvePassword } = require("../utils/password");
 
 const authenticate = async ({ login, password, role }) => {
