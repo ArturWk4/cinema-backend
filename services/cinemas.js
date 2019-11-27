@@ -27,18 +27,8 @@ const getCinema = async id => {
 
 const getAllCinemas = async () => await cinemaAccessor.getAllCinemas();
 
-const deleteCinema = async id => {
-  const cinema = await cinemaAccessor.getCinema(id);
-  if (!cinema) {
-    return null;
-  } else {
-    return await cinemaAccessor.deleteCinema(cinema);
-  }
-};
-
 module.exports = {
   addCinema,
   getCinema,
-  getAllCinemas,
-  deleteCinema
+  getAllCinemas
 };

@@ -8,18 +8,8 @@ const getCity = async id => {
 };
 
 const getAllCities = async () => cityAccessor.getAllCities();
-
-const deleteCity = async id => {
-  const city = await cityAccessor.getCity(id);
-  if (!city) {
-    return null;
-  } else {
-    return await cityAccessor.deleteCity(id);
-  }
-};
 module.exports = {
   addCity,
   getCity,
-  getAllCities,
-  deleteCity
+  getAllCities
 };
