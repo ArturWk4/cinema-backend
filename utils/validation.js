@@ -44,8 +44,20 @@ const validateFilm = (title, description, duration, startsAt, endsAt) => {
   );
 };
 
+const validateService = (title, price) => {
+  const schema = {
+    login: Joi.string().required(),
+    price: Joi.number()
+      .positive()
+      .required()
+  };
+  const { error } = Joi.validate({ title, price }, schema);
+  return !error;
+};
+
 module.exports = {
   validateLoginAndPassword,
   validateNewUser,
-  validateFilm
+  validateFilm,
+  validateService
 };
