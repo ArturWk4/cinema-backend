@@ -57,9 +57,9 @@ const validateService = (title, price) => {
 
 const validateSeat = (seatTypeId, xPos, yPos) => {
   const schema = {
-    seatTypeId: Joi.required().positive(),
-    xPos: Joi.required().positive(),
-    yPos: Joi.required().positive()
+    seatTypeId: Joi.required(),
+    xPos: Joi.required(),
+    yPos: Joi.required()
   };
   const { error } = Joi.validate({ seatTypeId, xPos, yPos }, schema);
   return !error;
@@ -68,7 +68,7 @@ const validateSeat = (seatTypeId, xPos, yPos) => {
 const validateSeatType = (title, cost) => {
   const schema = {
     title: Joi.string().required(),
-    cost: Joi.string().required()
+    cost: Joi.required()
   };
   const { error } = Joi.validate({ title, cost }, schema);
   return !error;
