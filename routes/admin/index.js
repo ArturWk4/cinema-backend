@@ -4,6 +4,7 @@ const cinemasRouter = require("./cinemas");
 const serviceRouter = require("./services");
 const seatsRouter = require("./seats");
 const seatTypesRouter = require("./seatTypes");
+const hallsRouter = require("./halls");
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.use("/cinemas", cinemasRouter);
 router.use("/services", serviceRouter);
 router.use("/seats", seatsRouter);
 router.use("/seat-types", seatTypesRouter);
+router.use("/halls", hallsRouter);
 
 module.exports = router;
