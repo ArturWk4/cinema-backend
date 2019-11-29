@@ -12,7 +12,7 @@ const authenticate = async ({ login, password, role }) => {
     return (token = jwt.sign(
       { login, password: user.password, role, id: user.id },
       SECRET,
-      { expiresIn: EXPIRES_IN_JWT }
+      { expiresIn: +EXPIRES_IN_JWT }
     ));
   }
 };
