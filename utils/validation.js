@@ -74,11 +74,21 @@ const validateSeatType = (title, cost) => {
   return !error;
 };
 
+const validateHall = (title, cinemaId) => {
+  const schema = {
+    title: Joi.required(),
+    cinemaId: Joi.required()
+  };
+  const { error } = Joi.validate({ title, cinemaId }, schema);
+  return !error;
+};
+
 module.exports = {
   validateLoginAndPassword,
   validateNewUser,
   validateFilm,
   validateService,
   validateSeat,
-  validateSeatType
+  validateSeatType,
+  validateHall
 };
