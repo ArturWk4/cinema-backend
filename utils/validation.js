@@ -83,6 +83,17 @@ const validateHall = (title, cinemaId) => {
   return !error;
 };
 
+const validateSeance = (startsAt, hallId, filmId) => {
+  const startsAtSchema = moment(startsAt, "YYYY-MM-DD HH:mm", true);
+  const schema = {
+    startsAt: Joi.required(),
+    hallId: Joi.required(),
+    filmId: Joi.required()
+  };
+  const { error } = Joi.validate({ startsAt, hallId, filmId }, schema);
+  return !error && startsAtSchema.isValid();
+};
+
 module.exports = {
   validateLoginAndPassword,
   validateNewUser,
@@ -90,5 +101,6 @@ module.exports = {
   validateService,
   validateSeat,
   validateSeatType,
-  validateHall
+  validateHall,
+  validateSeance
 };
