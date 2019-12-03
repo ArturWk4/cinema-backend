@@ -12,7 +12,7 @@ const app = express();
 passport.use(jwtStrategy);
 app.use(express.json());
 
-app.use("/public", publicRouter);
+app.use("/auth", publicRouter);
 
 app.use(
   "/admin",
