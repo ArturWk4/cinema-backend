@@ -7,7 +7,7 @@ const {
 
 const router = Router();
 
-router.post("", addHall);
+router.post("/", addHall);
 router.get("/", getAllHalls);
 router.get("/:id", getHall);
 
