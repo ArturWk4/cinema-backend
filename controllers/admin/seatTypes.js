@@ -1,6 +1,6 @@
 const HttpStatus = require("http-status-codes");
 const seatTypesServices = require("../../services/seatTypes");
-const { validateSeatType } = require("../utils/validation");
+const { validateSeatType } = require("../../utils/validation");
 
 const addSeatType = async (req, res) => {
   const { title, cost } = req.body;

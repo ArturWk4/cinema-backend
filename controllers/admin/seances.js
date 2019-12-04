@@ -1,6 +1,6 @@
 const HttpStatus = require("http-status-codes");
 const seanceService = require("../../services/seances");
-const { validateSeance } = require("../utils/validation");
+const { validateSeance } = require("../../utils/validation");
 
 const addSeance = async (req, res) => {
   const { startsAt, hallId, filmId } = req.body;

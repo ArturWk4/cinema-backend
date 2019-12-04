@@ -1,6 +1,6 @@
 const HttpStatus = require("http-status-codes");
 const serviceServices = require("../../services/service");
-const { validateService } = require("../utils/validation");
+const { validateService } = require("../../utils/validation");
 
 const addService = async (req, res) => {
   const { title, price } = req.body;

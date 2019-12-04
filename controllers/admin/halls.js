@@ -1,6 +1,6 @@
 const HttpStatus = require("http-status-codes");
 const hallService = require("../../services/halls");
-const { validateHall } = require("../utils/validation");
+const { validateHall } = require("../../utils/validation");
 
 const addHall = async (req, res) => {
   const { title, cinemaId } = req.body;
