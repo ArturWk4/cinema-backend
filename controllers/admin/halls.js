@@ -1,12 +1,13 @@
 const HttpStatus = require("http-status-codes");
 const hallService = require("../../services/halls");
+const { validateHall } = require("../utils/validation");
 
 const addHall = async (req, res) => {
   const { title, cinemaId } = req.body;
-  const hall = await hallService.addHall({ title, cinemaId });
-  if (!hall) {
+  if (!validateHall(title, cinemaId)) {
     res.status(HttpStatus.BAD_REQUEST).end();
   } else {
+    await hallService.addHall({ title, cinemaId });
     res.status(HttpStatus.CREATED).end();
   }
 };

@@ -1,10 +1,9 @@
 const HttpStatus = require("http-status-codes");
-const cinemaServices = require("../../services/cinemas");
+const cinemaService = require("../../services/cinemas");
 
 const addCinema = async (req, res) => {
   const { title, city } = req.body;
-  const cinema = await cinemaServices.addCinema({ title, city });
-
+  const cinema = await cinemaService.addCinema({ title, city });
   if (!cinema) {
     res
       .status(HttpStatus.BAD_REQUEST)
@@ -15,13 +14,13 @@ const addCinema = async (req, res) => {
 };
 
 const getAllCinemas = async (req, res) => {
-  const cinemas = await cinemaServices.getAllCinemas();
+  const cinemas = await cinemaService.getAllCinemas();
   res.status(HttpStatus.OK).json(cinemas);
 };
 
 const getCinema = async (req, res) => {
   const { id } = req.params;
-  const cinema = await cinemaServices.getCinema(id);
+  const cinema = await cinemaService.getCinema(id);
   if (!cinema) {
     res.status(HttpStatus.NOT_FOUND).end();
   } else {
@@ -31,7 +30,7 @@ const getCinema = async (req, res) => {
 
 const deleteCinema = async (req, res) => {
   const { id } = req.params;
-  const deletedCinema = await cinemaServices.deleteCinema(id);
+  const deletedCinema = await cinemaService.deleteCinema(id);
   if (!deletedCinema) {
     res.status(HttpStatus.NOT_FOUND).end();
   } else {

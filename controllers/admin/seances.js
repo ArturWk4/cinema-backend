@@ -1,19 +1,20 @@
 const HttpStatus = require("http-status-codes");
-const seanceServices = require("../../services/seances");
+const seanceService = require("../../services/seances");
+const { validateSeance } = require("../utils/validation");
 
 const addSeance = async (req, res) => {
   const { startsAt, hallId, filmId } = req.body;
-  const seance = await seanceServices.addSeance({ startsAt, hallId, filmId });
-  if (!seance) {
+  if (!validateSeance(startsAt, hallId, filmId)) {
     res.status(HttpStatus.BAD_REQUEST).end();
   } else {
+    await seanceService.addSeance({ startsAt, hallId, filmId });
     res.status(HttpStatus.CREATED).end();
   }
 };
 
 const getSeance = async (req, res) => {
   const { id } = req.params;
-  const seance = await seanceServices.getSeance(id);
+  const seance = await seanceService.getSeance(id);
   if (!seance) {
     res.status(HttpStatus.NOT_FOUND).end();
   } else {
@@ -22,7 +23,7 @@ const getSeance = async (req, res) => {
 };
 
 const getAllSeances = async (req, res) => {
-  const seances = await seanceServices.getAllSeances();
+  const seances = await seanceService.getAllSeances();
   res.status(HttpStatus.OK).json(seances);
 };
 

@@ -1,12 +1,13 @@
 const HttpStatus = require("http-status-codes");
 const seatTypesServices = require("../../services/seatTypes");
+const { validateSeatType } = require("../utils/validation");
 
 const addSeatType = async (req, res) => {
   const { title, cost } = req.body;
-  const seatType = await seatTypesServices.addSeatType({ title, cost });
-  if (!seatType) {
+  if (!validateSeatType(title, cost)) {
     res.status(HttpStatus.BAD_REQUEST).end();
   } else {
+    await seatTypesServices.addSeatType({ title, cost });
     res.status(HttpStatus.CREATED).end();
   }
 };
