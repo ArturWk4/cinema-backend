@@ -20,12 +20,9 @@ const addCinema = async ({ title, city }) => {
   return cinema;
 };
 
-const getCinema = async id => {
-  const cinema = await cinemaAccessor.getCinema(id);
-  return cinema || null;
-};
+const getCinema = id => cinemaAccessor.getCinema(id);
 
-const getAllCinemas = async () => await cinemaAccessor.getAllCinemas();
+const getAllCinemas = () => cinemaAccessor.getAllCinemas();
 
 module.exports = {
   addCinema,
