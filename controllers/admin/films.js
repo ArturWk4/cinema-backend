@@ -4,9 +4,7 @@ const filmsService = require("../../services/films");
 const addFilm = async (req, res) => {
   const film = await filmsService.addFilm(req.body);
   if (!film) {
-    res
-      .status(HttpStatus.BAD_REQUEST)
-      .json({ message: "Wrong data to add film" });
+    res.status(HttpStatus.BAD_REQUEST).end();
   } else {
     res.status(HttpStatus.CREATED).end();
   }
@@ -33,9 +31,7 @@ const deleteFilm = async (req, res) => {
   if (!deletedFilm) {
     res.status(HttpStatus.NOT_FOUND).end();
   } else {
-    res
-      .status(HttpStatus.OK)
-      .json({ message: `Successfully deleted film with id: ${id}` });
+    res.status(HttpStatus.OK).end();
   }
 };
 

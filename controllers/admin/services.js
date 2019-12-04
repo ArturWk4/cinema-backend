@@ -4,9 +4,7 @@ const serviceServices = require("../../services/service");
 const addService = async (req, res) => {
   const service = await serviceServices.addService(req.body);
   if (!service) {
-    res
-      .status(HttpStatus.BAD_REQUEST)
-      .json({ message: "Wrong data to add new service!" });
+    res.status(HttpStatus.BAD_REQUEST).end();
   }
   res.status(HttpStatus.CREATED).end();
 };

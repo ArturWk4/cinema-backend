@@ -5,9 +5,7 @@ const addSeatType = async (req, res) => {
   const { title, cost } = req.body;
   const seatType = await seatTypesServices.addSeatType({ title, cost });
   if (!seatType) {
-    res
-      .status(HttpStatus.BAD_REQUEST)
-      .json({ message: "Wrong data to add new seats type" });
+    res.status(HttpStatus.BAD_REQUEST).end();
   } else {
     res.status(HttpStatus.CREATED).end();
   }

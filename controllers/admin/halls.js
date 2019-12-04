@@ -5,9 +5,7 @@ const addHall = async (req, res) => {
   const { title, cinemaId } = req.body;
   const hall = await hallService.addHall({ title, cinemaId });
   if (!hall) {
-    res
-      .status(HttpStatus.BAD_REQUEST)
-      .json({ message: "Wrong data to add new hall" });
+    res.status(HttpStatus.BAD_REQUEST).end();
   } else {
     res.status(HttpStatus.CREATED).end();
   }
