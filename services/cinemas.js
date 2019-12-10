@@ -2,30 +2,20 @@ const cityAccessor = require("../data-access/cities");
 const cinemaAccessor = require("../data-access/cinemas");
 
 const addCinema = async ({ title, city }) => {
-  const cities = await cityAccessor.getAllCities();
-  const cinemas = await cinemaAccessor.getAllCinemas();
-  let existingCity = cities.find(cityItem => cityItem.name == city);
-  let existingCinema = cinemas.find(cinemaItem => cinemaItem.title == title);
-
-  if (!existingCity) {
-    existingCity = await cityAccessor.addCity({ name: city });
-  } else {
-    if (existingCinema) {
-      return null;
-    }
-  }
-
-  const cinema = await cinemaAccessor.addCinema({ title });
-  cinema.setCity(existingCity);
+  const cityItem = await cityAccessor.getOrCreate(
+    { name: city },
+    { name: city }
+  );
+  const cinema = await cinemaAccessor.getOrCreate(
+    { title, cityId: cityItem[0].id },
+    { title, cityId: cityItem[0].id }
+  );
   return cinema;
 };
 
-const getCinema = async id => {
-  const cinema = await cinemaAccessor.getCinema(id);
-  return cinema || null;
-};
+const getCinema = id => cinemaAccessor.getCinema(id);
 
-const getAllCinemas = async () => await cinemaAccessor.getAllCinemas();
+const getAllCinemas = () => cinemaAccessor.getAllCinemas();
 
 module.exports = {
   addCinema,

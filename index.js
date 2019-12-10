@@ -4,7 +4,7 @@ const passport = require("passport");
 dotenv.config({ path: "./.env" });
 const sequelize = require("./database/connection");
 const jwtStrategy = require("./passport/strategy");
-const publicRouter = require("./routes");
+const publicRouter = require("./routes/auth");
 const adminRouter = require("./routes/admin/index");
 const { PORT } = process.env;
 const app = express();
@@ -12,7 +12,7 @@ const app = express();
 passport.use(jwtStrategy);
 app.use(express.json());
 
-app.use("/public", publicRouter);
+app.use("/auth", publicRouter);
 
 app.use(
   "/admin",

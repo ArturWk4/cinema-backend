@@ -1,16 +1,16 @@
 const HttpStatus = require("http-status-codes");
 const hallService = require("../../services/halls");
+const { validateHall } = require("../../utils/validation");
 
 const addHall = async (req, res) => {
-  const { title, cinemaId } = req.body;
-  const hall = await hallService.addHall({ title, cinemaId });
-  if (!hall) {
-    res
-      .status(HttpStatus.BAD_REQUEST)
-      .json({ message: "Wrong data to add new hall" });
-  } else {
-    res.status(HttpStatus.CREATED).end();
+  const { title, cinemaId, seats } = req.body;
+  if (validateHall(title, cinemaId)) {
+    const hall = await hallService.addHall({ title, cinemaId, seats });
+    if (hall) {
+      res.status(HttpStatus.CREATED).end();
+    }
   }
+  res.status(HttpStatus.BAD_REQUEST).end();
 };
 
 const getAllHalls = async (req, res) => {

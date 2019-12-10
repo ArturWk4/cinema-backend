@@ -1,19 +1,10 @@
 const seatTypeAccessor = require("../data-access/seatTypes");
-const { validateSeatType } = require("../utils/validation");
 
-const addSeatType = async ({ title, cost }) => {
-  if (!validateSeatType(title, cost)) {
-    return null;
-  }
-  return await seatTypeAccessor.addSeatType({ title, cost });
-};
+const addSeatType = ({ title, cost }) => seatTypeAccessor.addSeatType({ title, cost });
 
-const getAllSeatTypes = async () => seatTypeAccessor.getAllSeatTypes();
+const getAllSeatTypes = () => seatTypeAccessor.getAllSeatTypes();
 
-const getSeatType = async id => {
-  const seatType = await seatTypeAccessor.getSeatType(id);
-  return seatType || null;
-};
+const getSeatType = id => seatTypeAccessor.getSeatType(id);
 
 module.exports = {
   addSeatType,

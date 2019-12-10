@@ -1,14 +1,15 @@
 const HttpStatus = require("http-status-codes");
 const serviceServices = require("../../services/service");
+const { validateService } = require("../../utils/validation");
 
 const addService = async (req, res) => {
-  const service = await serviceServices.addService(req.body);
-  if (!service) {
-    res
-      .status(HttpStatus.BAD_REQUEST)
-      .json({ message: "Wrong data to add new service!" });
+  const { title, price } = req.body;
+  if (!validateService(title, price)) {
+    res.status(HttpStatus.BAD_REQUEST).end();
+  } else {
+    await serviceServices.addService(req.body);
+    res.status(HttpStatus.CREATED).end();
   }
-  res.status(HttpStatus.CREATED).end();
 };
 
 const getAllServices = async (req, res) => {

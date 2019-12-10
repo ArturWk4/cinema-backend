@@ -1,13 +1,11 @@
 const cityAccessor = require("../data-access/cities");
 
-const addCity = async city => cityAccessor.addCity(city);
+const addCity = city => cityAccessor.addCity(city);
 
-const getCity = async id => {
-  const city = await cityAccessor.getCity(id);
-  return city || null;
-};
+const getCity = id => cityAccessor.getCity(id);
 
-const getAllCities = async () => cityAccessor.getAllCities();
+const getAllCities = () => cityAccessor.getAllCities();
+
 module.exports = {
   addCity,
   getCity,

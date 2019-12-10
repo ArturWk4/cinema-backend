@@ -1,19 +1,26 @@
 const hallsAccessor = require("../data-access/halls");
-const { validateHall } = require("../utils/validation");
+const cinemaAccessor = require("../data-access/cinemas");
+const seatService = require("./seats");
 
-const addHall = async ({ title, cinemaId }) => {
-  if (!validateHall(title, cinemaId)) {
+const addHall = async ({ title, cinemaId, seats }) => {
+  const cinema = await cinemaAccessor.getCinema(cinemaId);
+  if (!cinema) {
     return null;
   }
-  return await hallsAccessor.addHall({ title, cinemaId });
+  const hall = await hallsAccessor.getOrCreate(
+    { title, cinemaId: cinema.id },
+    { title, cinemaId: cinema.id }
+  );
+  seats.forEach(seat => {
+    seatService.addSeat({ ...seat, hallId: hall[0].dataValues.id });
+  });
+
+  return hall;
 };
 
-const getHall = async id => {
-  const hall = await hallsAccessor.getHall(id);
-  return hall || null;
-};
+const getHall = id => hallsAccessor.getHall(id);
 
-const getAllHalls = async () => await hallsAccessor.getAllHalls();
+const getAllHalls = () => hallsAccessor.getAllHalls();
 
 module.exports = {
   addHall,

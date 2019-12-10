@@ -1,19 +1,21 @@
 const seatAccessor = require("../data-access/seats");
-const { validateSeat } = require("../utils/validation");
+const hallAccessor = require("../data-access/halls");
 
-const addSeat = async ({ seatTypeId, xPos, yPos }) => {
-  if (!validateSeat(seatTypeId, xPos, yPos)) {
+const addSeat = async ({ seatTypeId, xPos, yPos, hallId }) => {
+  const hall = await hallAccessor.getHall(hallId);
+  if(!hall) {
     return null;
   }
-  return await seatAccessor.addSeat({ seatTypeId, xPos, yPos });
+  const seat = await seatAccessor.getOrCreate(
+    { xPos, yPos },
+    { seatTypeId, xPos, yPos, hallId }
+  );
+  return seat;
 };
 
-const getAllSeats = async () => await seatAccessor.getAllSeats();
+const getAllSeats = () => seatAccessor.getAllSeats();
 
-const getSeat = async id => {
-  const seat = await seatAccessor.getSeat(id);
-  return seat || null;
-};
+const getSeat = id => seatAccessor.getSeat(id);
 
 module.exports = {
   addSeat,

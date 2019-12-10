@@ -1,20 +1,11 @@
 const serviceAccessor = require("../data-access/service");
-const { validateService } = require("../utils/validation");
 
-const addService = async ({ title, price }) => {
-  if (!validateService(title, price)) {
-    return null;
-  }
-  const service = await serviceAccessor.addService({ title, price });
-  return service;
-};
+const addService = ({ title, price }) =>
+  serviceAccessor.addService({ title, price });
 
-const getAllServices = async () => await serviceAccessor.getAllServices();
+const getAllServices = () => serviceAccessor.getAllServices();
 
-const getService = async id => {
-  const service = await serviceAccessor.getService(id);
-  return service || null;
-};
+const getService = id => serviceAccessor.getService(id);
 
 module.exports = {
   addService,
