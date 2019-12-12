@@ -19,8 +19,11 @@ const getAllSeats = () => seatAccessor.getAllSeats();
 
 const getSeat = id => seatAccessor.getSeat(id);
 
+const addSeats = seats => seatAccessor.addSeats(seats);
+
 module.exports = {
   addSeat,
   getAllSeats,
-  getSeat
+  getSeat,
+  addSeats
 };

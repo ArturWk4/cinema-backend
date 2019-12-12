@@ -7,13 +7,15 @@ const addHall = async ({ title, cinemaId, seats }) => {
   if (!cinema) {
     return null;
   }
-  const hall = await hallsAccessor.getOrCreate(
-    { title, cinemaId: cinema.id },
-    { title, cinemaId: cinema.id }
-  );
-  seats.forEach(seat => {
-    seatService.addSeat({ ...seat, hallId: hall[0].dataValues.id });
-  });
+  let hall = await hallsAccessor.getHallWhere({ title, cinemaId: cinema.id });
+  if (hall) {
+    return null;
+  } else {
+    hall = await hallsAccessor.addHall({ title, cinemaId });
+    await seatService.addSeats(
+      seats.map(item => ({ ...item, hallId: hall.dataValues.id }))
+    );
+  }
 
   return hall;
 };
