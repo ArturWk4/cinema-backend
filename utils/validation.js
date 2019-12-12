@@ -94,6 +94,16 @@ const validateSeance = (startsAt, hallId, filmId) => {
   return !error && startsAtSchema.isValid();
 };
 
+const validateBook = (seatId, userId, seanceId) => {
+  const schema = {
+    userId: Joi.required().positive(),
+    seatId: Joi.required().positive(),
+    seanceId: Joi.required().positive()
+  };
+  const { error } = Joi.validate({ seatId, userId, seanceId }, schema);
+  return !error;
+};
+
 module.exports = {
   validateLoginAndPassword,
   validateNewUser,
@@ -102,5 +112,6 @@ module.exports = {
   validateSeat,
   validateSeatType,
   validateHall,
-  validateSeance
+  validateSeance,
+  validateBook
 };

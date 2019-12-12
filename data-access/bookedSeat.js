@@ -1,9 +1,11 @@
 const BookedSeat = require("../database/models/bookedSeat");
 
-const getBookedSeatWhere = async seat => BookedSeat.findOne({ where: seat });
+const getBookedSeatWhere = async where => BookedSeat.findOne({ where });
 const bookSeat = async book => BookedSeat.create(book);
+const deleteBook = async book => book.destroy();
 
 module.exports = {
   getBookedSeatWhere,
-  bookSeat
+  bookSeat,
+  deleteBook
 };
