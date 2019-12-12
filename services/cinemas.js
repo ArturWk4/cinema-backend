@@ -6,10 +6,15 @@ const addCinema = async ({ title, city }) => {
     { name: city },
     { name: city }
   );
-  const cinema = await cinemaAccessor.getOrCreate(
-    { title, cityId: cityItem[0].id },
-    { title, cityId: cityItem[0].id }
-  );
+  let cinema = await cinemaAccessor.getCinemaWhere({
+    title,
+    cityId: cityItem[0].id
+  });
+  if (cinema) {
+    return null;
+  } else {
+    cinema = await cinemaAccessor.addCinema({ title, cityId: cityItem[0].id });
+  }
   return cinema;
 };
 

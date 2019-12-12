@@ -3,13 +3,15 @@ const hallAccessor = require("../data-access/halls");
 
 const addSeat = async ({ seatTypeId, xPos, yPos, hallId }) => {
   const hall = await hallAccessor.getHall(hallId);
-  if(!hall) {
+  if (!hall) {
     return null;
   }
-  const seat = await seatAccessor.getOrCreate(
-    { xPos, yPos },
-    { seatTypeId, xPos, yPos, hallId }
-  );
+  let seat = await seatAccessor.getSeatWhere({ xPos, yPos });
+  if (seat) {
+    return null;
+  } else {
+    seat = await seatAccessor.addSeat({ seatTypeId, xPos, yPos, hallId });
+  }
   return seat;
 };
 
@@ -17,8 +19,11 @@ const getAllSeats = () => seatAccessor.getAllSeats();
 
 const getSeat = id => seatAccessor.getSeat(id);
 
+const addSeats = seats => seatAccessor.addSeats(seats);
+
 module.exports = {
   addSeat,
   getAllSeats,
-  getSeat
+  getSeat,
+  addSeats
 };
