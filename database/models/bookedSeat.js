@@ -10,8 +10,7 @@ const bookedSeat = sequelize.define(
       allowNull: false,
       type: Sequelize.INTEGER
     },
-    exires: Sequelize.DATE,
-    isTaken: Sequelize.BOOLEAN
+    expires: Sequelize.DATE
   },
   {
     tableName: "bookedSeat",
