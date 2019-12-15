@@ -7,7 +7,7 @@ const router = Router();
 
 router.use("/create", createRouter);
 router.use("/login", loginRouter);
-router.use("/booking", bookingRouter);
-// need to replace craete and login routers into public access
+router.use("/book-seat", bookingRouter);
+// need to replace craete and login routers to public access
 
 module.exports = router;

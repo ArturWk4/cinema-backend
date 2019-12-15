@@ -96,9 +96,9 @@ const validateSeance = (startsAt, hallId, filmId) => {
 
 const validateBook = (seatId, userId, seanceId) => {
   const schema = {
-    userId: Joi.required().positive(),
-    seatId: Joi.required().positive(),
-    seanceId: Joi.required().positive()
+    seatId: Joi.required(),
+    userId: Joi.required(),
+    seanceId: Joi.required()
   };
   const { error } = Joi.validate({ seatId, userId, seanceId }, schema);
   return !error;

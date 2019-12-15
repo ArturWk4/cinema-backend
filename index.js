@@ -20,7 +20,9 @@ app.use(
   passport.authenticate("jwt", { session: false }),
   adminRouter
 );
-app.use("/user", passport.authenticate("jwt", { session: false }), userRouter);
+
+//app.use("/user", passport.authenticate("jwt", { session: false }), userRouter);
+app.use("/user", userRouter);
 
 async function start() {
   try {
