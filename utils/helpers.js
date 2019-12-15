@@ -8,6 +8,12 @@ const setExpiresSqlDate = expiresMinutesAmount => {
   return now.format("YYYY-MM-DD HH:mm:ss");
 };
 
-const isBookExpire = date => {
-    
-}
+const isBookExpired = date => {
+  const now = nowSqlDate();
+  return moment(now).isAfter(date);
+};
+
+module.exports = {
+  setExpiresSqlDate,
+  isBookExpired
+};
