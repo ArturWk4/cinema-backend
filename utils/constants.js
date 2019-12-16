@@ -7,5 +7,5 @@ module.exports = {
   BCRYPT_ROUNDS,
   NAME_REGEX,
   ROLE_USER,
-  ROLE_ADMIN,
+  ROLE_ADMIN
 };

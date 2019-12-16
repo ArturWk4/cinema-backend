@@ -15,10 +15,6 @@ const hall = sequelize.define(
     title: {
       type: Sequelize.STRING,
       allowNull: false
-    },
-    imageName: {
-      type: Sequelize.STRING,
-      allowNull: false
     }
   },
   {
