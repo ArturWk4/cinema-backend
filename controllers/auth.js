@@ -30,7 +30,7 @@ const login = role => async (req, res) => {
 const registration = async (req, res) => {
   const { firstName, surname, login, password } = req.body;
   if (!validateNewUser(firstName, surname, login, password)) {
-    res
+    return res
       .status(HttpStatus.BAD_REQUEST)
       .json({ message: "Wrong data to add new user!" });
   }
